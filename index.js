@@ -32,18 +32,15 @@ app.use('/usuarios', usuariosRouter);
 const logger = bunyan.createLogger({ name: "Servidor" });
 
 // Middleware para manejar errores 404 (no encontrado)
-app.use((req, res, next) => {
-  const error = new Error(`No se encontró la ruta solicitada: ${req.originalUrl}`);
-  logger.warn(error.message);
-  res.status(404).json({ error: 'Not Found' });
-});
+app.use((req,res)=>{
+  res.status(404).json({mensaje: 'No se ha encontrado la ruta'})
+})
+
 
 // Middleware para manejar errores 500 (error interno del servidor)
-app.use((err, req, res, next) => {
-  logger.error(`Error en la aplicación: ${err.message}`);
-  res.status(500).json({ error: 'Algo salió mal, intenta nuevamente más tarde.' });
-});
-
+app.use((err,req,next)=>{
+  res.status(500).json({mensaje: err})
+})
 // Definición del puerto en el que escuchará el servidor
 let puerto = process.env.PORT || 3000;
 
