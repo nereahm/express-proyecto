@@ -20,7 +20,7 @@ app.use(express.json());
 // Middleware para parsear datos de formularios URL-encoded
 app.use(express.urlencoded({ extended: true }));
 
-// Middleware para servir archivos estáticos (las imagenes) desde la carpeta 'public'
+// Middleware para servir archivos estáticos (las imágenes) desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, "public")));
 
 // Asociación de los enrutadores a las rutas específicas
@@ -32,17 +32,18 @@ app.use('/usuarios', usuariosRouter);
 const logger = bunyan.createLogger({ name: "Servidor" });
 
 // Middleware para manejar errores 404 (no encontrado)
-app.use((req,res)=>{
-  res.status(404).json({mensaje: 'No se ha encontrado la ruta'})
-})
-
+app.use((req, res, next) => {
+  res.status(404).json({ mensaje: 'No se ha encontrado la ruta' });
+});
 
 // Middleware para manejar errores 500 (error interno del servidor)
-app.use((err,req,next)=>{
-  res.status(500).json({mensaje: err})
-})
+app.use((err, req, res, next) => {
+  logger.error(err); // Loguea el error interno del servidor
+  res.status(500).json({ mensaje: 'Error interno del servidor' });
+});
+
 // Definición del puerto en el que escuchará el servidor
-let puerto = process.env.PORT || 3000;
+const puerto = process.env.PORT || 3000;
 
 // Inicio del servidor, escuchando en el puerto especificado
 app.listen(puerto, () => {
