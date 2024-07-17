@@ -1,5 +1,23 @@
 {
-    "version" : 2,
-    "builds"  : [ { "src" : "index.js"  , "use" : "@vercel/node" } ],
-    "routes"  : [ { "src" : "/(.*)"     , "dest": "index.js"     } ]
-}
+    "version": 2,
+    "builds": [
+      { "src": "index.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+      { "src": "/api/(.*)", "dest": "index.js" },
+      { "src": "/adoptame", "dest": "index.html" },
+      { "src": "/login", "dest": "index.html" },
+      { "src": "/quienes-somos", "dest": "index.html" },
+      { "src": "/contacto", "dest": "index.html" },
+      { "src": "/mi-cuenta", "dest": "index.html" },
+      { "src": "/nuevo-gato", "dest": "index.html" },
+      { "src": "/nuevo-perro", "dest": "index.html" },
+      { "src": "/borrar-gato/(.*)", "dest": "index.html" },
+      { "src": "/borrar-perro/(.*)", "dest": "index.html" },
+      { "src": "/editar-gato/(.*)", "dest": "index.html" },
+      { "src": "/editar-perro/(.*)", "dest": "index.html" },
+      { "src": "/formulario-adopcion", "dest": "index.html" },
+      { "src": "/(.*)", "dest": "index.html" }
+    ]
+  }
+  
