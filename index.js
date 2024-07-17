@@ -13,9 +13,6 @@ const app = express();
 
 // Middleware para permitir CORS
 app.use(cors({
-  origin: 'https://react-proyecto-xi.vercel.app', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 // Middleware para parsear JSON en las solicitudes
 app.use(express.json());
