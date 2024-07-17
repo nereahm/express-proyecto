@@ -31,6 +31,11 @@ app.use('/usuarios', usuariosRouter);
 // Configuración del logger utilizando Bunyan
 const logger = bunyan.createLogger({ name: "Servidor" });
 
+// Ruta principal que sirve index.html para manejar el enrutamiento del lado del cliente
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Middleware para manejar errores 404 (no encontrado)
 app.use((req, res, next) => {
   res.status(404).json({ mensaje: 'No se ha encontrado la ruta' });
